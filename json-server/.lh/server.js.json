@@ -1,0 +1,18 @@
+{
+    "sourceFile": "server.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1658470167959,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1658470167959,
+            "name": "Commit-0",
+            "content": "const jsonServer = require(\"json-server\");\nconst { delay } = require(\"lodash\");\nconst server = jsonServer.create();\nconst router = jsonServer.router(\"db.json\");\nconst middlewares = jsonServer.defaults();\n\nserver.use(middlewares);\n\nserver.use(\n  jsonServer.rewriter({\n    \"/vce/status\": \"/managedNetworkingStatus\",\n  })\n);\n\nserver.use((req, res, next) => {\n  console.log(\"POST request listener\");\n  const body = req.body;\n  console.log(body);\n  if (req.method === \"POST\") {\n    // If the method is a POST echo back the name from request body\n    next();\n  } else {\n    //Not a post request. Let db.json handle it\n    delay(3000);\n    next();\n  }\n});\n\nserver.post(\"/vce/validate\", (req, res) => {\n  res.status(200).json({ valid: true });\n});\n\nserver.post(\"/cloudProviderAccounts/:cloudId/vpcs\", (req, res) => {\n  res.status(200);\n});\n\nserver.use(router);\n\nserver.listen(3000, () => {\n  console.log(\"JSON Server is runningn with\");\n});\n"
+        }
+    ]
+}

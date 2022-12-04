@@ -1,0 +1,13 @@
+{
+  "errorDetails": [
+    {
+      "errorLog": {
+        "username": "johndoe",
+        "potential_customer": true,
+        "feature_name": "coupon code",
+        "error": "Internal Server Error: We've encountered an issue in authentication"
+      },
+      "id": 1
+    }
+  ]
+}
